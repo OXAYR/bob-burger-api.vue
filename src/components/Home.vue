@@ -1,14 +1,12 @@
 <template>
   <div>
-  <ul class="divide-y divide-gray-200">
-    <li v-for="u in user" :key="u.id">
-      <div class="py-4 flex bg-white shadow-md rounded-md">
-        <img class="h-20 w-20 rounded-full" :src="u.image" alt="" />
-        <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">{{ u.name }}</p>
-          <p class="text-sm text-gray-500">{{ u.gender }}</p>
+  <ul  class="grid gap-4 grid-cols-3 grid-rows-3">
+    <li v-for="u in user" :key="u.id" class=" p-4 shadow-lg">
+        <img class="w-auto aspect-square"  :src="u.image" :alt="u.name + image"  />
+        <div class="py-4 font-serif">
+          <p> Name: {{ u.name }}</p>
+          <p> Gender: {{ u.gender }}</p>
         </div>
-      </div>
     </li>
   </ul>
 </div>
