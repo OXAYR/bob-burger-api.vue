@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <HomeComp/>
+    <div class="flex">
+      <SideBar class="top-16" />
+      <div class="ml-60"> 
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HomeComp from '@/components/Home.vue'
+//import HomeComp from '@/components/Home.vue';
+import SideBar from '../components/SideBar.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    HomeComp
+  //  HomeComp,
+    SideBar
   }
-}
+};
 </script>

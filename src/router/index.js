@@ -3,29 +3,46 @@ import HomeView from '../views/HomeView.vue'
 import FilterById from '../views/FilterById.vue'
 import FilterByHair from '../views/FilterByHair.vue'
 import FilterByGender from '../views/FilterByGender.vue'
+import LoginView from '../views/LoginView.vue'
+import SingupView from '../views/SingnupView.vue'
+import AllView from '../views/AllView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Login',
+    component: LoginView
   },
   {
-    path: '/filterById',
-    name: 'filterById',
-    component: FilterById
+    path: '/signup',
+    name: 'SignUp',
+    component: SingupView
   },
   {
-    path: '/filterByHair',
-    name: 'filterByHair',
-    component: FilterByHair
-  },
-  {
-    path: '/filterByGender',
-    name: 'filterByGender',
-    component: FilterByGender
-  },
-]
+    path: '/home',
+    name: 'Home',
+    component: HomeView, 
+    children: [
+      {
+        path: 'allView',
+        component: AllView
+      },
+      {
+        path: 'filterById',
+        component: FilterById
+      },
+      {
+        path: 'filterByHair',
+        component: FilterByHair
+      },
+      {
+        path: 'filterByGender',
+        component: FilterByGender
+      }
+    ]
+  }
+];
+
 
 const router = createRouter({
   history: createWebHashHistory(),

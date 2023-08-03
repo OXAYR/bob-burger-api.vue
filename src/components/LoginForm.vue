@@ -1,76 +1,89 @@
 <template>
-  <v-sheet width="300" class="mx-auto">
-    <h1 style="margin-bottom: 2rem;">Sign In</h1>
-    <v-form >
-      <v-text-field
-        v-model="formLogin.email"
-        label="Email"
-      ></v-text-field>
-      <v-text-field
-        v-model="formLogin.password"
-        label="password"
-      ></v-text-field>
-    </v-form>
-  </v-sheet>
-  <ButtonComp text="login"/>
-  <v-btn block variant="plain">
-    <span class="text-button"> forget password </span>
-  </v-btn>
+  <div class="card mt-32 Login px-4 py-11 max-w-xs mx-auto">
+    <h1 class="text-center text-3xl font-medium font-serif">Sign In</h1>
+    <input
+      type="email"
+      placeholder="Email"
+      v-model="formLogin.email"
+      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+    >
+    <input
+      type="password"
+      placeholder="Password"
+      v-model="formLogin.password"
+      class="mt-4 p-2 border border-gray-300 rounded-md w-full"
+    >
+    <p v-if="error.length" class="text-red-500 text-sm">{{ error }}</p>
+    <button class="mt-4 px-32 py-2  bg-yellow-200 hover:bg-yellow-400 rounded-full"
+        @click="checkValidation(formLogin) ">
+        <p class="text-black font-serif text-center">Login</p>
+    </button>
+
+    <router-link to="/signup" class="block mt-2">
+      <button
+        class="Register pl-32 pr-28 py-2 bg-white hover:bg-slate-100 rounded-full"
+      >
+      <p class="text-black font-serif break-keep">Register</p>
+      </button>
+    </router-link>
+</div>
+
 </template>
 <script>
-
 import router from '@/router';
-import ButtonComp from '@/components/ButtonComp.vue'
-export default {
-  name: 'LoginForm',
-  props: {
-      msg: String,
-    },
-  components:{
-    ButtonComp
+  export default {
+name: 'LoginForm',
+props: {
+    msg: String,
   },
-  data() {
-    return {
-        validCredential: false,
-        formLogin :{
-        email: "",
-        password: ''    
-        },
-        error:[],
-    }
+data() {
+  return {
+      validCredential: false,
+      formLogin :{
+      email: "",
+      password: ''    
+      },
+      error:[],
+  }
 },
 methods:{
-  
-    toValidate(obj){
-      
-          if(localStorage.getItem("Email") == obj.email){
-           
-            if(localStorage.getItem("Password") == obj.password){
-            
-              router.push('/todos')
-            }
-          }
-      },
-    Valid: function(obj) {
-        this.error = [];
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-='|"])[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-='|"']{8,}$/;
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-        
-      if (!emailPattern.test(obj.email)) {
-        this.error.push("Invalid Email");
-      } 
-      if (!passwordPattern.test(obj.password)) {
-          this.error.push("Invalid Password");
-      }
-        
-      }
+  toValidate(obj){
     
+        if(localStorage.getItem("Email") == obj.email && localStorage.getItem("Password") == obj.password){
+            router.push('/home')
+        }
+        else{
+          this.error.push("Incorrent Credentials")
+        }
+    },
+  checkValidation: function(obj) {
+      this.error = [];
+      const passwordPattern =/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~/\\\-='|"])[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~/\\\-='|"]{8,}$/;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      
+    if (!emailPattern.test(obj.email) && !passwordPattern.test(obj.password)) {
+      this.error.push("Invalid Email or Password");
     }
+    else{
+      this.toValidate(obj);
     }
+      
+    }
+  
+  }
+  }
 
 </script>
 
 <style scoped>
+fieldset{
+margin-bottom: 2rem;
+}
+.Button{
 
+margin-top: 2rem;
+}
 </style>
+

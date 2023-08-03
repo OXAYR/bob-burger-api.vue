@@ -1,20 +1,24 @@
 <template>
-    <div class="flex flex-col justify-center items-center">
-        <input type="text" class="w-full m-auto outline-none mt-20 mx-8 border border-black" v-model="characterGender">
-        <button class="bg-green-400 w-48 mt-4 mx-20" @click="getCharByGender(characterGender)">Filter</button>
-        
+    <h1 class="text-semibold font-serif text-xl">Filter By Gender</h1>
+    <div class="flex">
+        <input type="text" class="my-4 p-2 border border-gray-300 rounded-md max-w-40" v-model="characterGender">
+        <button class="m-4 px-7   bg-yellow-200 hover:bg-yellow-400 rounded-full" @click="getCharByGender(characterGender)">Filter</button>
+        <CardComp :item="character"/>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-
+import CardComp from '../components/Card.vue'
 export default {
     name: 'FilterById',
     data () {
         return {
-            characterGender: null
+            characterGender: ""
         }
+    },
+    components:{
+        CardComp
     },
     methods: {
         ...mapActions({ getCharByGender: 'getCharacterByGender' })

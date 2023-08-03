@@ -15,7 +15,7 @@ export default createStore({
   },
   actions: {
    async registerUser({ commit }) {
-      const response = await axios.get("https://bobsburgers-api.herokuapp.com/v2/characters/[1,2,3]")
+      const response = await axios.get("https://bobsburgers-api.herokuapp.com/v2/characters")
       commit('setUser',response.data)
     },
 
@@ -24,8 +24,9 @@ export default createStore({
       commit('SET_CHARACTER', response.data)
     },
     async getCharacterByHair({ commit }, hair) {
-      const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?hairColor=${hair}`)
+      const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?hair=${hair}`)
       commit('SET_CHARACTER', response.data)
+      console.log(response.data)
     },
     async getCharacterByGender({ commit }, gender) {
       const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?gender=${gender}`)
