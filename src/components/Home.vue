@@ -1,13 +1,14 @@
 <template>
   <div>
-  <ul  class="grid gap-4 grid-cols-3 grid-rows-3">
-    <li v-for="u in user" :key="u.id" class=" p-4 shadow-lg">
-        <img class="w-auto aspect-square"  :src="u.image" :alt="u.name + image"  />
+  <ul  class="grid gap-4 grid-cols-6 grid-rows-3">
+    <router-link :to="{ name: 'filterById' }">Go</router-link>
+    <!-- <li v-for="u in user" :key="u.id" class=" p-4 shadow-lg">
+        <img class="w-auto aspect-square"  :src="u.image" :alt="u.name + 'image'"  />
         <div class="py-4 font-serif">
           <p> Name: {{ u.name }}</p>
           <p> Gender: {{ u.gender }}</p>
         </div>
-    </li>
+    </li> -->
   </ul>
 </div>
 </template>
@@ -27,7 +28,7 @@ export default {
   }, 
 
   created() {
-    this.createUser();
+    // this.createUser();
   }
 }
 </script>
