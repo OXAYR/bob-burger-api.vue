@@ -14,26 +14,45 @@ export default createStore({
     }
   },
   actions: {
+      async registerUser({ commit }) {
+        try {
+          const response = await axios.get("https://bobsburgers-api.herokuapp.com/v2/characters")
+          commit('setUser', response.data)
+        } catch (error) {
+          console.log(error)
+        }
+      },
     
-   async registerUser({ commit }) {
-      const response = await axios.get("https://bobsburgers-api.herokuapp.com/v2/characters")
-      commit('setUser',response.data)
+      async getCharacterById({ commit }, id) {
+        try {
+          const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters/${id}`)
+          commit('SET_CHARACTER', response.data)
+        } catch (error) {
+          console.log(error)
+        }
+      },
+    
+      async getCharacterByHair({ commit }, hair) {
+        try {
+          const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?hair=${hair}`)
+          commit('SET_CHARACTER', response.data)
+          console.log(response.data)
+        } catch (error) {
+          console.log(error)
+        }
+      },
+    
+      async getCharacterByGender({ commit }, gender) {
+        try {
+          const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?gender=${gender}`)
+          commit('SET_CHARACTER', response.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
     },
-
-    async getCharacterById({ commit }, id) {
-      const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters/${id}`)
-      commit('SET_CHARACTER', response.data)
-    },
-    async getCharacterByHair({ commit }, hair) {
-      const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?hair=${hair}`)
-      commit('SET_CHARACTER', response.data)
-      console.log(response.data)
-    },
-    async getCharacterByGender({ commit }, gender) {
-      const response = await axios.get(`https://bobsburgers-api.herokuapp.com/v2/characters?gender=${gender}`)
-      commit('SET_CHARACTER', response.data)
-    }  
-  },
+    
+    
   getters: {
     getUser(state) {
       return state.user
