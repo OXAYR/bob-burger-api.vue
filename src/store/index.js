@@ -14,6 +14,7 @@ export default createStore({
     }
   },
   actions: {
+    
    async registerUser({ commit }) {
       const response = await axios.get("https://bobsburgers-api.herokuapp.com/v2/characters")
       commit('setUser',response.data)

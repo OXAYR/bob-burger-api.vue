@@ -2,7 +2,7 @@
   <div class="home">
     <div class="flex">
       <SideBar class="top-16" />
-      <div class="ml-60"> 
+      <div class="ml-60">
         <router-view />
       </div>
     </div>
@@ -11,13 +11,13 @@
 
 <script>
 //import HomeComp from '@/components/Home.vue';
-import SideBar from '../components/SideBar.vue';
+import SideBar from "../components/SideBar.vue";
 
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-  //  HomeComp,
-    SideBar
-  }
+    //  HomeComp,
+    SideBar,
+  },
 };
 </script>
